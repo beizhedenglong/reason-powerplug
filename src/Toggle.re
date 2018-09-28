@@ -7,7 +7,7 @@ let component = ReasonReact.statelessComponent("Toggle");
 type param = {
   on: bool,
   toggle: unit => unit,
-  set: bool => unit,
+  set: (bool => bool) => unit,
 };
 let make = (~initial=false, ~onChange=?, children) => {
   ...component,
@@ -15,11 +15,7 @@ let make = (~initial=false, ~onChange=?, children) => {
     <Value initial ?onChange>
       ...{
            ({value, set}) =>
-             children({
-               on: value,
-               toggle: () => set(value => !value),
-               set: newValue => set(_ => newValue),
-             })
+             children({on: value, toggle: () => set(value => !value), set})
          }
     </Value>,
 };
