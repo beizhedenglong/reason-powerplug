@@ -17,6 +17,7 @@ module Make = (M: S) => {
     remove: M.t => unit,
     has: M.t => bool,
     reset: unit => unit,
+    set: (MSet.t => MSet.t) => unit,
   };
   let make = (~initial=MSet.empty, ~onChange=?, children) => {
     ...component,
@@ -31,6 +32,7 @@ module Make = (M: S) => {
                  remove: set <|| MSet.remove,
                  has: Utils.flip(MSet.mem, value),
                  reset: () => set(_ => MSet.empty),
+                 set,
                })
            }
       </Value>,
