@@ -8,10 +8,57 @@ module StringList = ReList.Make(String);
 
 module StringSet = ReSet.Make(String);
 
+module Value =
+  Value.Make({
+    type t = int;
+  });
+
 let ignore = (fn, x, _) => fn(x);
 ReactDOMRe.renderToElementWithId(
   <div>
-    <Value2 initial=2> ...{({value}) => ReasonReact.string(value)} </Value2>
+    <Input> ...{({value, onChange}) => <input value onChange />} </Input>
+    <Value initial=1>
+      ...{
+           ({value, set, reset}) =>
+             <div>
+               <button onClick={ignore(set, _ => 100)}>
+                 {ReasonReact.string("set 1000")}
+               </button>
+               <Interval delay=value>
+                 ...{
+                      ({stop, start}) =>
+                        <div>
+                          <button onClick={ignore(start, ())}>
+                            {ReasonReact.string("start")}
+                          </button>
+                          <button onClick={ignore(stop, ())}>
+                            {ReasonReact.string("stop")}
+                          </button>
+                          {
+                            Js.Date.now()
+                            |> string_of_float
+                            |> ReasonReact.string
+                          }
+                        </div>
+                    }
+               </Interval>
+             </div>
+         }
+    </Value>
+    <Hover>
+      ...{
+           ({hovered, onMouseEnter, onMouseLeave}) =>
+             <div onMouseEnter onMouseLeave>
+               {
+                 ReasonReact.string(
+                   " You are "
+                   ++ (hovered ? "hovering" : "not hovering")
+                   ++ "this div",
+                 )
+               }
+             </div>
+         }
+    </Hover>
     <StringSet initial={StringSet.of_list(["1", "2", "3"])}>
       ...{
            ({values, add, clear}) =>
@@ -62,7 +109,7 @@ ReactDOMRe.renderToElementWithId(
                <button onClick={ignore(toggle, ())}>
                  {ReasonReact.string("toggle")}
                </button>
-               <button onClick={ignore(set, false)}>
+               <button onClick={ignore(set, _ => false)}>
                  {ReasonReact.string("set false")}
                </button>
              </div>
@@ -72,10 +119,10 @@ ReactDOMRe.renderToElementWithId(
       ...{
            ({list, sort, reset}) =>
              <div>
-               <button onClick={ignore(sort, String.compare)}>
+               <button onClick={_ => sort(String.compare)}>
                  {ReasonReact.string("sort")}
                </button>
-               <button onClick={ignore(reset, ())}>
+               <button onClick={_ => reset()}>
                  {ReasonReact.string("reset")}
                </button>
                <ul>

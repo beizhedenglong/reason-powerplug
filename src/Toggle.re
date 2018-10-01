@@ -8,14 +8,20 @@ type param = {
   on: bool,
   toggle: unit => unit,
   set: (bool => bool) => unit,
+  reset: unit => unit,
 };
 let make = (~initial=false, ~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial ?onChange>
       ...{
-           ({value, set}) =>
-             children({on: value, toggle: () => set(value => !value), set})
+           ({value, set, reset}) =>
+             children({
+               on: value,
+               toggle: () => set(value => !value),
+               set,
+               reset,
+             })
          }
     </Value>,
 };

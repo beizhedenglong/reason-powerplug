@@ -6,6 +6,7 @@ type param = {
   dec: unit => unit,
   incBy: int => unit,
   decBy: int => unit,
+  reset: unit => unit,
 };
 module Value =
   Value.Make({
@@ -16,10 +17,11 @@ let make = (~initial, ~onChange=?, children) => {
   render: _self =>
     <Value initial ?onChange>
       ...{
-           ({value, set}) =>
+           ({value, set, reset}) =>
              children({
                count: value,
                set,
+               reset,
                inc: () => set(value => value + 1),
                dec: () => set(value => value - 1),
                incBy: number => set(value => value + number),
