@@ -1,6 +1,15 @@
 {
   "name": "reason-powerplug",
   "version": "0.1.1",
+  "description": "A set of reuseable `components` and `functors` for  reason react",
+  "homepage": "https://github.com/beizhedenglong/reason-powerplug",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beizhedenglong/reason-powerplug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beizhedenglong/reason-powerplug/issues"
+  },
   "scripts": {
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",

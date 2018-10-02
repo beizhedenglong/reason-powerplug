@@ -6,31 +6,34 @@ This project is inspired by [react-powerplug](https://github.com/renatorib/react
 ```ocaml
 module StringList = ReList.Make(String);
 
-<StringList initial=["d", "c", "a", "e", "b", "h", "g"]>
-      ...{
-           ({list, sort, reset}) =>
-             <div>
-               <button onClick={_ => sort(String.compare)}>
-                 {ReasonReact.string("sort")}
-               </button>
-               <button onClick={_ => reset()}>
-                 {ReasonReact.string("reset")}
-               </button>
-               <ul>
-                 {
-                   list
-                   |> List.map(s => <li key=s> {ReasonReact.string(s)} </li>)
-                   |> Array.of_list
-                   |> ReasonReact.array
-                 }
-               </ul>
-             </div>
-         }
-    </StringList>
+  <StringList initial=["d", "c", "a", "e", "b", "h", "g"]>
+    ...{
+          ({list, sort, reset}) =>
+            <div>
+              <button onClick={_ => sort(String.compare)}>
+                {ReasonReact.string("sort")}
+              </button>
+              <button onClick={_ => reset()}>
+                {ReasonReact.string("reset")}
+              </button>
+              <ul>
+                {
+                  list
+                  |> List.map(s => <li key=s> {ReasonReact.string(s)} </li>)
+                  |> Array.of_list
+                  |> ReasonReact.array
+                }
+              </ul>
+            </div>
+        }
+  </StringList>
 ```
 [More Examples](https://github.com/beizhedenglong/reason-powerplug/blob/master/examples/Index.re)
 
+## Installation
+`yarn add reason-powerplug` or `npm install reason-powerplug --save`
 
+then add `reason-powerplug` to `bs-dependencies` in `bsconfig.json`.
 
 ## Components/Functors
 
