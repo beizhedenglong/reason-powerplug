@@ -26,7 +26,11 @@
     "state",
     "RenderProps"
   ],
-  "author": "",
+  "author": {
+    "name": "Victor",
+    "url": "https://github.com/beizhedenglong",
+    "email": "wang_shaojie@icloud.com"
+  },
   "license": "MIT",
   "peerDependencies": {
     "bs-platform": "^4.0.5",
