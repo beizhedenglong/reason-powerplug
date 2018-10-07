@@ -1,6 +1,6 @@
 {
   "name": "reason-powerplug",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A set of reuseable `components` and `functors` for  reason react",
   "homepage": "https://github.com/beizhedenglong/reason-powerplug",
   "repository": {
