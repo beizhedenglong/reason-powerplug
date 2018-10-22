@@ -1,5 +1,5 @@
 # Reason PowerPlug
-Reason PowerPlug is a set of reuseable `components` and `functors` for  reason react.
+Reason PowerPlug is a set of reuseable `components` and `functors` for  ReasonReact.
 This project is inspired by [react-powerplug](https://github.com/renatorib/react-powerplug). 
 
 
