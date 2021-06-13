@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("Input");
-
 module Value = Value.Make(String);
 
 type param = {
@@ -9,21 +7,19 @@ type param = {
   onChange: ReactEvent.Form.t => unit,
 };
 
-let make = (~initial="", ~onChange=?, children) => {
-  ...component,
-  render: _self =>
-    <Value initial ?onChange>
-      ...{
-           ({value, set, reset}) =>
-             children({
-               value,
-               reset,
-               set,
-               onChange: e => {
-                 let newValue = e->ReactEvent.Form.target##value;
-                 set(_ => newValue);
-               },
-             })
-         }
-    </Value>,
+[@react.component]
+let make = (~initial="", ~onChange=?, ~children) => {
+  <Value initial ?onChange>
+    ...{({value, set, reset}: Value.param) =>
+      children({
+        value,
+        reset,
+        set,
+        onChange: e => {
+          let newValue = e->ReactEvent.Form.target##value;
+          set(_ => newValue);
+        },
+      })
+    }
+  </Value>;
 };

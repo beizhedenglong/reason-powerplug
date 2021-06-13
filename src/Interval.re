@@ -6,8 +6,6 @@ type state = {
 type action =
   | Update;
 
-let component = ReasonReact.reducerComponent("Interval");
-
 type param = {
   start: unit => unit,
   stop: unit => unit,
@@ -17,17 +15,21 @@ type param = {
 /* outsiede of make function */
 let intervalIdOption = ref(None);
 
-let make = (~delay=1000, children) => {
-  let start = (_, self) =>
+[@react.component]
+let make = (~delay=1000, ~children) => {
+  let (state, dispatch) =
+    React.useReducer(
+      (state, action) =>
+        switch (action) {
+        | Update => {...state, times: state.times + 1}
+        },
+      {times: 0, delay},
+    );
+  let start = _ =>
     switch (intervalIdOption^) {
     | None =>
       intervalIdOption :=
-        Some(
-          Js.Global.setInterval(
-            () => self.ReasonReact.send(Update),
-            self.state.delay,
-          ),
-        )
+        Some(Js.Global.setInterval(() => dispatch(Update), state.delay))
     | Some(_) => ()
     };
   let stop = () =>
@@ -37,33 +39,30 @@ let make = (~delay=1000, children) => {
       Js.Global.clearInterval(intervalId);
       intervalIdOption := None;
     };
-  let toggle = (_, self) =>
+  let toggle = () =>
     switch (intervalIdOption^) {
-    | None => self.ReasonReact.handle(start, ())
+    | None => start()
     | Some(_) => stop()
     };
+  let stop = () =>
+    switch (intervalIdOption^) {
+    | None => ()
+    | Some(intervalId) =>
+      Js.Global.clearInterval(intervalId);
+      intervalIdOption := None;
+    };
 
-  {
-    ...component,
-    initialState: () => {times: 0, delay},
-    didMount: self => self.handle(start, ()),
-    willUnmount: _self => stop(),
-    willReceiveProps: ({state}) =>
-      state.delay != delay ? {...state, delay} : state,
-    didUpdate: ({oldSelf, newSelf}) =>
-      if (oldSelf.state.delay != newSelf.state.delay) {
-        stop();
-        newSelf.handle(start, ());
-      },
-    reducer: (action, state) =>
-      switch (action) {
-      | Update => ReasonReact.Update({...state, times: state.times + 1})
-      },
-    render: self =>
-      children({
-        start: self.handle(start),
-        stop,
-        toggle: self.handle(toggle),
-      }),
-  };
+  React.useEffect0(() => {
+    start();
+    Some(() => stop());
+  });
+  React.useEffect1(
+    () => {
+      state.delay != delay ? stop() : start();
+      None;
+    },
+    [|state|],
+  );
+
+  children({start, stop, toggle});
 };

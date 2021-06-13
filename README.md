@@ -1,7 +1,8 @@
 # Reason PowerPlug
-Reason PowerPlug is a set of reuseable `components` and `functors` for  ReasonReact.
-This project is inspired by [react-powerplug](https://github.com/renatorib/react-powerplug). 
 
+Reason PowerPlug is a set of reuseable `components` and `functors` for
+ReasonReact. This project is inspired by
+[react-powerplug](https://github.com/renatorib/react-powerplug).
 
 ```ocaml
 module StringList = ReList.Make(String);
@@ -28,9 +29,11 @@ module StringList = ReList.Make(String);
         }
   </StringList>
 ```
+
 [More Examples](https://github.com/beizhedenglong/reason-powerplug/blob/master/examples/Index.re)
 
 ## Installation
+
 `yarn add reason-powerplug` or `npm install reason-powerplug --save`
 
 then add `reason-powerplug` to `bs-dependencies` in `bsconfig.json`.
@@ -59,8 +62,6 @@ All components and functors base on `Value.Make` Functor.
 | <h6>OTHER</h6>               |                                                                                                       |
 | **Interval**                 | Component                                                                                             | `{ delay }`             | `{ stop, start, toggle }`                                              |
 
-
-
 ### Value
 
 ```ocaml
@@ -80,7 +81,5 @@ module Number =
 
 
 ```
-
-
 
 TODO

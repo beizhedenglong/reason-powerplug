@@ -1,5 +1,5 @@
 let tryWith = f =>
-  try (Some(f())) {
+  try(Some(f())) {
   | _ => None
   };
 
