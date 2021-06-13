@@ -22,7 +22,7 @@ module Make = (M: S) => {
   [@react.component]
   let make = (~initial=MSet.empty, ~onChange=?, ~children) => {
     <Value initial ?onChange>
-      ...{({value, set}:Value.param) =>
+      ...{({value, set}: Value.param) =>
         children({
           values: value,
           clear: () => set(_ => MSet.empty),

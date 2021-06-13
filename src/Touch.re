@@ -12,7 +12,7 @@ type param = {
 [@react.component]
 let make = (~onChange=?, ~children) => {
   <Value initial=false ?onChange>
-    ...{({value, set}:Value.param) =>
+    ...{({value, set}: Value.param) =>
       children({
         touched: value,
         onTouchStart: _ => set(_ => true),

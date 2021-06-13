@@ -11,7 +11,7 @@ type param = {
 [@react.component]
 let make = (~onChange=?, ~children) => {
   <Value initial=false ?onChange>
-    ...{({value, set}:Value.param) =>
+    ...{({value, set}: Value.param) =>
       children({
         hovered: value,
         onMouseEnter: _ => set(_ => true),

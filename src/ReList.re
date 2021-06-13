@@ -24,7 +24,7 @@ module Make = (M: S) => {
     let last = head <|| List.rev;
     let complement = (f, x) => !f(x);
     <Value initial ?onChange>
-      ...{({value, set, reset}:Value.param) =>
+      ...{({value, set, reset}: Value.param) =>
         children({
           list: value,
           first: () => head(value),

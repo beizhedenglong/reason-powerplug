@@ -28,7 +28,7 @@ module Make = (M: S) => {
   [@react.component]
   let make = (~initial=MMap.empty, ~onChange=?, ~children) => {
     <Value initial ?onChange>
-      ...{({value, set, reset}:Value.param) =>
+      ...{({value, set, reset}: Value.param) =>
         children({
           values: value,
           clear: () => set(_ => MMap.empty),

@@ -17,7 +17,7 @@ type param = {
 let make = (~onChange=?, ~children) => {
   let canBlur = ref(true);
   <Value initial=false ?onChange>
-    ...{({value, set}:Value.param) =>
+    ...{({value, set}: Value.param) =>
       children({
         focused: value,
         blur: () =>

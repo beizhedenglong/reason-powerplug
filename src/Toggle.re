@@ -12,7 +12,7 @@ type param = {
 [@react.component]
 let make = (~initial=false, ~onChange=?, ~children) => {
   <Value initial ?onChange>
-    ...{({value, set, reset}:Value.param) =>
+    ...{({value, set, reset}: Value.param) =>
       children({on: value, toggle: () => set(value => !value), set, reset})
     }
   </Value>;
