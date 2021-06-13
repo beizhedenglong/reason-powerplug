@@ -7,7 +7,7 @@ module Make = (M: S) => {
     Value.Make({
       type t = list(M.t);
     });
-  let component = ReasonReact.statelessComponent("List");
+
   type param = {
     list: list(M.t),
     first: unit => option(M.t),
@@ -18,28 +18,24 @@ module Make = (M: S) => {
     sort: ((M.t, M.t) => int) => unit,
     reset: unit => unit,
   };
-  let make = (~initial=[], ~onChange=?, children) => {
+  [@react.component]
+  let make = (~initial=[], ~onChange=?, ~children) => {
     let head = xs => (() => List.hd(xs)) |> Utils.tryWith;
     let last = head <|| List.rev;
     let complement = (f, x) => !f(x);
-    {
-      ...component,
-      render: _self =>
-        <Value initial ?onChange>
-          ...(
-               ({value, set, reset}) =>
-                 children({
-                   list: value,
-                   first: () => head(value),
-                   last: () => last(value),
-                   set,
-                   push: set <|| Utils.flip(List.append),
-                   sort: set <|| List.sort,
-                   pull: set <|| List.filter <|| complement,
-                   reset,
-                 })
-             )
-        </Value>,
-    };
+    <Value initial ?onChange>
+      ...{({value, set, reset}:Value.param) =>
+        children({
+          list: value,
+          first: () => head(value),
+          last: () => last(value),
+          set,
+          push: set <|| Utils.flip(List.append),
+          sort: set <|| List.sort,
+          pull: set <|| List.filter <|| complement,
+          reset,
+        })
+      }
+    </Value>;
   };
 };

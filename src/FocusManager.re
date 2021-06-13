@@ -1,5 +1,3 @@
-let component = ReasonReact.statelessComponent("FocusManager");
-
 module Value =
   Value.Make({
     type t = bool;
@@ -15,31 +13,27 @@ type param = {
   onMouseUp: ReactEvent.Mouse.t => unit,
 };
 
-let make = (~onChange=?, children) => {
+[@react.component]
+let make = (~onChange=?, ~children) => {
   let canBlur = ref(true);
-  {
-    ...component,
-    render: _self =>
-      <Value initial=false ?onChange>
-        ...(
-             ({value, set}) =>
-               children({
-                 focused: value,
-                 blur: () =>
-                   if (value == true) {
-                     %bs.raw
-                     {| document.activeElement.blur() |};
-                   },
-                 tabIndex: (-1),
-                 onBlur: _ =>
-                   if (canBlur^) {
-                     set(_ => false);
-                   },
-                 onFocus: _ => set(_ => true),
-                 onMouseDown: _ => canBlur := false,
-                 onMouseUp: _ => canBlur := true,
-               })
-           )
-      </Value>,
-  };
+  <Value initial=false ?onChange>
+    ...{({value, set}:Value.param) =>
+      children({
+        focused: value,
+        blur: () =>
+          if (value == true) {
+            %bs.raw
+            {| document.activeElement.blur() |};
+          },
+        tabIndex: (-1),
+        onBlur: _ =>
+          if (canBlur^) {
+            set(_ => false);
+          },
+        onFocus: _ => set(_ => true),
+        onMouseDown: _ => canBlur := false,
+        onMouseUp: _ => canBlur := true,
+      })
+    }
+  </Value>;
 };

@@ -1,7 +1,7 @@
 {
   "name": "reason-powerplug",
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "sources": [
     {
@@ -17,16 +17,16 @@
     {
       "module": "commonjs",
       "in-source": false
+    },
+    {
+      "module": "commonjs",
+      "in-source": true
     }
   ],
   "suffix": ".bs.js",
   "namespace": true,
-  "bs-dependencies": [
-    "reason-react"
-  ],
+  "bs-dependencies": [ "reason-react" ],
   "bs-dev-dependencies": [
-    "@glennsl/bs-jest",
-    "bs-react-test-renderer"
-  ],
-  "refmt": 3
+    "@glennsl/bs-jest"
+  ]
 }
