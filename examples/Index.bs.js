@@ -32,16 +32,19 @@ function ignore(fn, x, param) {
   return Curry._1(fn, x);
 }
 
-ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.createElement(Input$ReasonPowerplug.make, {
+ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.createElement("h1", undefined, "Input Functor"), React.createElement(Input$ReasonPowerplug.make, {
               children: (function (param) {
-                  return React.createElement("input", {
-                              value: param.value,
-                              onChange: param.onChange
-                            });
+                  var value = param.value;
+                  console.log("value: ", value);
+                  return React.createElement("div", undefined, React.createElement("p", undefined, "open the console to see changes"), React.createElement("input", {
+                                  value: value,
+                                  onChange: param.onChange
+                                }));
                 })
-            }), React.createElement(Value.make, {
+            }), React.createElement("h1", undefined, "Value Functor"), React.createElement(Value.make, {
               initial: 1,
               children: (function (param) {
+                  var reset = param.reset;
                   var set = param.set;
                   return React.createElement("div", undefined, React.createElement("button", {
                                   onClick: (function (param) {
@@ -62,11 +65,15 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                                       onClick: (function (param) {
                                                           return Curry._1(stop, undefined);
                                                         })
-                                                    }, "stop"), Date.now().toString());
+                                                    }, "stop"), React.createElement("button", {
+                                                      onClick: (function (param) {
+                                                          return Curry._1(reset, undefined);
+                                                        })
+                                                    }, "reset"), Date.now().toString());
                                     })
                                 }));
                 })
-            }), React.createElement(Hover$ReasonPowerplug.make, {
+            }), React.createElement("h1", undefined, "Hover Functor"), React.createElement(Hover$ReasonPowerplug.make, {
               children: (function (param) {
                   return React.createElement("div", {
                               onMouseEnter: param.onMouseEnter,
@@ -75,7 +82,7 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                 param.hovered ? "hovering" : "not hovering"
                               ) + "this div"));
                 })
-            }), React.createElement(StringSet.make, {
+            }), React.createElement("h1", undefined, "StringSet"), React.createElement(StringSet.make, {
               initial: Curry._1(StringSet.of_list, {
                     hd: "1",
                     tl: {
@@ -103,7 +110,7 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                                       }, item);
                                           }), Curry._1(StringSet.elements, param.values)))));
                 })
-            }), React.createElement($$Number.make, {
+            }), React.createElement("h1", undefined, "Number"), React.createElement($$Number.make, {
               initial: 1,
               children: (function (param) {
                   var set = param.set;
@@ -115,7 +122,7 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                 })
                             }, String(param.value));
                 })
-            }), React.createElement(Counter$ReasonPowerplug.make, {
+            }), React.createElement("h1", undefined, "Counter"), React.createElement(Counter$ReasonPowerplug.make, {
               initial: 0,
               onChange: (function (count) {
                   console.log(count);
@@ -129,7 +136,7 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                     })
                                 }, "+1"));
                 })
-            }), React.createElement(Toggle$ReasonPowerplug.make, {
+            }), React.createElement("h1", undefined, "Toggle"), React.createElement(Toggle$ReasonPowerplug.make, {
               initial: true,
               onChange: (function (param) {
                   return Utils$ReasonPowerplug.$less$pipe$pipe((function (prim) {
@@ -150,9 +157,9 @@ ReactDOMRe.renderToElementWithId(React.createElement("div", undefined, React.cre
                                                     return false;
                                                   }));
                                     })
-                                }, "set false"));
+                                }, "set false"), React.createElement("div", undefined, param.on ? "toggle show" : null));
                 })
-            }), React.createElement(StringList.make, {
+            }), React.createElement("h1", undefined, "StringList"), React.createElement(StringList.make, {
               initial: {
                 hd: "d",
                 tl: {
