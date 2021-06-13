@@ -13,13 +13,13 @@ let make = (~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial=false ?onChange>
-      ...{
+      ...(
            ({value, set}) =>
              children({
                active: value,
                onMouseDown: _ => set(_ => true),
                onMouseUp: _ => set(_ => false),
              })
-         }
+         )
     </Value>,
 };

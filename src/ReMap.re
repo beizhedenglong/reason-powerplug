@@ -30,7 +30,7 @@ module Make = (M: S) => {
     ...component,
     render: _self =>
       <Value initial ?onChange>
-        ...{
+        ...(
              ({value, set, reset}) =>
                children({
                  values: value,
@@ -42,7 +42,7 @@ module Make = (M: S) => {
                  set,
                  add: (k, v) => MMap.add(k, v) |> set,
                })
-           }
+           )
       </Value>,
   };
 };

@@ -14,7 +14,7 @@ let make = (~initial=false, ~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial ?onChange>
-      ...{
+      ...(
            ({value, set, reset}) =>
              children({
                on: value,
@@ -22,6 +22,6 @@ let make = (~initial=false, ~onChange=?, children) => {
                set,
                reset,
              })
-         }
+         )
     </Value>,
 };

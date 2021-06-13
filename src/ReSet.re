@@ -23,7 +23,7 @@ module Make = (M: S) => {
     ...component,
     render: _self =>
       <Value initial ?onChange>
-        ...{
+        ...(
              ({value, set}) =>
                children({
                  values: value,
@@ -34,7 +34,7 @@ module Make = (M: S) => {
                  reset: () => set(_ => MSet.empty),
                  set,
                })
-           }
+           )
       </Value>,
   };
 };

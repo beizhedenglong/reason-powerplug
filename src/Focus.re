@@ -15,13 +15,13 @@ let make = (~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial=false ?onChange>
-      ...{
+      ...(
            ({value, set}) =>
              children({
                focused: value,
                onFocus: _ => set(_ => true),
                onBlur: _ => set(_ => false),
              })
-         }
+         )
     </Value>,
 };

@@ -21,7 +21,7 @@ let make = (~onChange=?, children) => {
     ...component,
     render: _self =>
       <Value initial=false ?onChange>
-        ...{
+        ...(
              ({value, set}) =>
                children({
                  focused: value,
@@ -39,7 +39,7 @@ let make = (~onChange=?, children) => {
                  onMouseDown: _ => canBlur := false,
                  onMouseUp: _ => canBlur := true,
                })
-           }
+           )
       </Value>,
   };
 };

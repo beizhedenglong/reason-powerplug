@@ -15,13 +15,13 @@ let make = (~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial=false ?onChange>
-      ...{
+      ...(
            ({value, set}) =>
              children({
                touched: value,
                onTouchStart: _ => set(_ => true),
                onTouchEnd: _ => set(_ => false),
              })
-         }
+         )
     </Value>,
 };

@@ -16,7 +16,7 @@ let make = (~initial, ~onChange=?, children) => {
   ...component,
   render: _self =>
     <Value initial ?onChange>
-      ...{
+      ...(
            ({value, set, reset}) =>
              children({
                count: value,
@@ -27,6 +27,6 @@ let make = (~initial, ~onChange=?, children) => {
                incBy: number => set(value => value + number),
                decBy: number => set(value => value - number),
              })
-         }
+         )
     </Value>,
 };

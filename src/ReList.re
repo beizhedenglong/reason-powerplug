@@ -26,7 +26,7 @@ module Make = (M: S) => {
       ...component,
       render: _self =>
         <Value initial ?onChange>
-          ...{
+          ...(
                ({value, set, reset}) =>
                  children({
                    list: value,
@@ -38,7 +38,7 @@ module Make = (M: S) => {
                    pull: set <|| List.filter <|| complement,
                    reset,
                  })
-             }
+             )
         </Value>,
     };
   };

@@ -11,10 +11,6 @@
     {
       "dir": "examples",
       "type": "dev"
-    },
-    {
-      "dir": "__tests__",
-      "type": "dev"
     }
   ],
   "package-specs": [
